@@ -1,0 +1,38 @@
+data:
+  n_rows: 3000000
+  seed: 42
+  output_path: data/sales_data.csv
+
+validation:
+  required_columns:
+    sale_id: int64
+    date: datetime64
+    region: object
+    product_id: object
+    product_category: object
+    customer_id: object
+    quantity: int64
+    unit_price: float64
+    discount: float64
+    revenue: float64
+  unique_columns: [sale_id]
+  null_check_columns: [date, region, product_id, revenue]
+  range_checks:
+    quantity: [1, 100]
+    unit_price: [5.0, 500.0]
+    discount: [0.0, 0.5]
+
+analysis:
+  top_n: 10
+  moving_average_windows: [7, 14, 30]
+  ntile_quartiles: 4
+  percentile_columns: [revenue, quantity]
+
+  regions: [North, South, East, West, Central]
+  categories: [Electronics, Clothing, Food, Furniture, Software]
+  channels: [Online, Retail, Wholesale]
+
+output:
+  output_dir: outputs
+  save_csv: true
+  save_report: true
